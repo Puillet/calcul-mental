@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="text-center">
-            <p class="white-text text-lighten-5">Votre score est de <b>${nbCorrect} / ${nbQuestion}</b></p>
+            <p class="white-text text-lighten-5">Votre score est de <b>${nbCorrect} / ${nbQuestions}</b></p>
             <a class="button expanded" href="<c:url value="/accueil" />">Retourner à l'accueil</a>
     </div>
 </div>
