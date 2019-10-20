@@ -33,7 +33,7 @@ public class JeuController extends HttpServlet {
             //sinon on repose un calcul à l'utilisateur
             else {
                 Jeu jeu = new Jeu();
-                jeu.expression(5);
+                jeu.expression(1);
                 request.setAttribute("jeu", jeu);
                 session.setAttribute("pile", jeu.getPile());
                 request.getRequestDispatcher(PAGE_JEU_JSP).forward(request, response);

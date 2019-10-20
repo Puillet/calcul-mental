@@ -42,10 +42,11 @@ public class Jeu {
     }
 
     public void nbAleatoire(){
-        Double r = random(0.0, 30.0);
+        Double r = random(0.0, 50.0);
         r = Math.floor(r * 100) / 100;
         pile.push(r);
         calcul = "" + r + "";
+        System.out.println(r);
     }
 
     public void opeAleatoire(){
@@ -81,8 +82,8 @@ public class Jeu {
             if(pile.size() == 1 ){
                 nbAleatoire();
             }else if(pile.size() >= 2){
-                opeAleatoire();
                 nbAleatoire();
+                opeAleatoire();
             }
             opeAleatoire();
         }

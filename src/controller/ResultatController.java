@@ -23,9 +23,6 @@ public class ResultatController extends HttpServlet {
         if(loginBean.isConnected(request) && (int) session.getAttribute("nbQuestion") >= 10){
             request.setAttribute("nbCorrect", session.getAttribute("nbCorrect"));
             request.setAttribute("nbQuestion", session.getAttribute("nbQuestion"));
-            JeuBean jeuBean = new JeuBean();
-            //on vérifie sur le score que viens de faire l'utilisateur est meilleur que son dernier score
-            jeuBean.verifMeilleurScore(request);
             request.getRequestDispatcher(PAGE_RESULTAT_JSP).forward(request, response);
         }else {
             response.sendRedirect(request.getContextPath() + PAGE_LOGIN_JSP);
