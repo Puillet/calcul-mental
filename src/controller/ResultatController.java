@@ -20,9 +20,9 @@ public class ResultatController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();
         HttpSession session = request.getSession();
-        if(loginBean.isConnected(request) && (int) session.getAttribute("nbQuestion") >= 10){
+        if(loginBean.isConnected(request) && (int) session.getAttribute("nbQuestions") >= 10){
             request.setAttribute("nbCorrect", session.getAttribute("nbCorrect"));
-            request.setAttribute("nbQuestion", session.getAttribute("nbQuestion"));
+            request.setAttribute("nbQuestions", session.getAttribute("nbQuestions"));
             request.getRequestDispatcher(PAGE_RESULTAT_JSP).forward(request, response);
         }else {
             response.sendRedirect(request.getContextPath() + PAGE_LOGIN_JSP);

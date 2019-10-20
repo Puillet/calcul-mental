@@ -37,8 +37,8 @@ public class AccueilController extends HttpServlet {
             request.setAttribute("accueilBean", accueilBean);
             request.getRequestDispatcher(PAGE_ACCUEIL_JSP).forward(request, response);
             HttpSession session = request.getSession();
-            session.setAttribute("nbQuestion",0);
-            session.setAttribute("nbVictoire",0);
+            session.setAttribute("nbQuestions",0);
+            session.setAttribute("nbCorrect",0);
         }
         else {
             response.sendRedirect(request.getContextPath() + PAGE_LOGIN_JSP);
