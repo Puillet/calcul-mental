@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 20 oct. 2019 à 19:17
+-- Généré le :  Dim 20 oct. 2019 à 21:44
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -25,21 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `score`
---
-
-DROP TABLE IF EXISTS `score`;
-CREATE TABLE IF NOT EXISTS `score` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `score` int(11) NOT NULL,
-  `idUser` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_user` (`idUser`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `user`
 --
 
@@ -48,26 +33,25 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `meilleur_score` int(11) DEFAULT NULL,
+  `meilleurScore` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `login`, `password`, `meilleur_score`) VALUES
-(1, 'mpichot', '12345', 8);
-
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `score`
---
-ALTER TABLE `score`
-  ADD CONSTRAINT `fk_user` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`);
+INSERT INTO `user` (`id`, `login`, `password`, `meilleurScore`) VALUES
+(1, 'mpichot', '12345', 8),
+(3, 'davy', '12345', 7),
+(4, 'jean', '12345', 5),
+(5, 'pierre', '12345', 9),
+(6, 'paul', '12345', 4),
+(7, 'jacques', '12345', 6),
+(8, 'michel', '12345', 2),
+(9, 'antoine', '12345', 3),
+(10, 'ema', '12345', 6),
+(11, 'albert', '12345', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
