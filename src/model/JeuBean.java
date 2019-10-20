@@ -28,24 +28,35 @@ public class JeuBean implements Serializable {
     }
 
     public void verifReponse(HttpServletRequest request){
+        System.out.println("Check answer");
         reponseUser = Double.valueOf(request.getParameter(reponse));
+        System.out.println("User Answer : " + reponseUser);
         HttpSession session = request.getSession();
         Stack<Double> correctAnswer = (Stack<Double>) session.getAttribute("pile");
-        if (Math.abs(reponseUser - correctAnswer.pop()) < 0.01) {
+        System.out.println("Correct Answer : " + correctAnswer);
+        //test pour valider le résultat de l'utilisateur, il peux rentrer une valeur arrondi à 0.0001 près
+        //ce test à du être mis en place ) cause de la conversion et de l'arrondi de l'ordinateur des valeurs
+        //et surtout à la longeur des résultat fournis
+        if (Math.abs(reponseUser - correctAnswer.pop()) < 0.01){
             System.out.println("Résultat Correct");
-            session.setAttribute("nbCorrect", (int) session.getAttribute("nbCorrect") + 1);
+            //si le résultat est correct on incrémente de 1 le nombre de bonnes
+            session.setAttribute("nbVictoire", (int) session.getAttribute("nbVictoire") + 1);
+        }else {
+            System.out.println("Résultat incorrect");
         }
-        session.setAttribute("nbQuestions", (int) session.getAttribute("nbQuestions") + 1);
+        //dans tous les cas on incrémente de 1 le nombre de question traitée
+        session.setAttribute("nbQuestion", (int) session.getAttribute("nbQuestion") + 1);
+        System.out.println("Nombre total de question éffectué : " + session.getAttribute("nbQuestion"));
     }
 
     public void verifMeilleurScore(HttpServletRequest request){
         HttpSession session = request.getSession();
         UserDAOJDBC dao = (UserDAOJDBC) DAOFactory.getUserDAO();
         User user = (User) session.getAttribute("isConnected");
-        if(user.getMeilleur_score() < (int) session.getAttribute("nbCorrect")){
+        if(user.getMeilleurScore() < (int) session.getAttribute("nbCorrect")){
             try {
                 JeuBean jeuBean = new JeuBean();
-                user.setMeilleur_score((Integer) session.getAttribute("nbCorrect"));
+                user.setMeilleurScore((Integer) session.getAttribute("nbCorrect"));
                 System.out.println("id user" + user.getId());
                 dao.update(user);
             } catch (Exception e) {

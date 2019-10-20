@@ -7,7 +7,7 @@ public class User implements Serializable {
     private int id;
     private String login;
     private String password;
-    private int meilleur_score;
+    private int meilleurScore;
 
     public User() {}
 
@@ -17,11 +17,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(int id, String login, String password, int meilleur_score) {
+    public User(int id, String login, String password, int meilleurScore) {
         this.id = id;
         this.login = login;
         this.password = password;
-        this.meilleur_score = meilleur_score;
+        this.meilleurScore = meilleurScore;
     }
 
     public int getId() {
@@ -48,11 +48,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getMeilleur_score() {
-        return meilleur_score;
+    public int getMeilleurScore() {
+        return meilleurScore;
     }
 
-    public void setMeilleur_score(int meilleur_score) {
-        this.meilleur_score = meilleur_score;
+    public void setMeilleurScore(int meilleurScore) {
+        this.meilleurScore = meilleurScore;
     }
 }

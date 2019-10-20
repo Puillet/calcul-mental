@@ -72,4 +72,7 @@ public class LoginBean implements Serializable {
     public void setAuthentResult( String authentResult ) {
         this.authentResult = authentResult;
     }
+
+    public void getMeilleur(HttpServletRequest request) {
+    }
 }

@@ -26,9 +26,11 @@ public class JeuController extends HttpServlet {
         LoginBean model = new LoginBean();
         if(model.isConnected(request)){
             HttpSession session = request.getSession();
-            if((int) session.getAttribute("nbQuestions") >= 10){
+            //si le nombre de question traité est supérieur à 10 montre la page des résultat
+            if((int) session.getAttribute("nbQuestion") >= 10){
                 response.sendRedirect(request.getContextPath() + PAGE_RESULTAT_JSP);
             }
+            //sinon on repose un calcul à l'utilisateur
             else {
                 Jeu jeu = new Jeu();
                 jeu.expression(1);
@@ -46,7 +48,7 @@ public class JeuController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JeuBean model = new JeuBean();
         model.verifReponse(request);
-        request.setAttribute("reponse", model);
+        request.setAttribute("answer", model);
         doGet(request, response);
     }
 }

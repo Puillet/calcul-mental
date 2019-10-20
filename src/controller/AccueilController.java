@@ -35,18 +35,31 @@ public class AccueilController extends HttpServlet {
             AccueilBean accueilBean = new AccueilBean();
             accueilBean.getUsers();
             request.setAttribute("accueilBean", accueilBean);
+
+
             request.getRequestDispatcher(PAGE_ACCUEIL_JSP).forward(request, response);
             HttpSession session = request.getSession();
-            session.setAttribute("nbQuestions",0);
-            session.setAttribute("nbCorrect",0);
+            session.setAttribute("nbQuestion",0);
+            session.setAttribute("nbVictoire",0);
+
         }
+
         else {
             response.sendRedirect(request.getContextPath() + PAGE_LOGIN_JSP);
         }
+
+        model.getMeilleur(request);
+        request.getRequestDispatcher(PAGE_ACCUEIL_JSP).forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
+
+
+
+
+
+
 }

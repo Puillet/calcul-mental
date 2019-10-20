@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class Score implements Serializable {
 
     private int id;
-    private int resultat;
-    private int userId;
+    private int score;
+    private int idUser;
 
     public Score() {}
 
-    public Score(int resultat, int userId) {
-        this.resultat = resultat;
-        this.userId = userId;
+    public Score(int score, int idUser) {
+        this.score = score;
+        this.idUser = idUser;
     }
 
     public int getId() {
@@ -23,19 +23,19 @@ public class Score implements Serializable {
         this.id = id;
     }
 
-    public int getResultat() {
-        return resultat;
+    public int getScore() {
+        return score;
     }
 
-    public void setResultat(int resultat) {
-        this.resultat = resultat;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 }
