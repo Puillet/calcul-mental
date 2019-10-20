@@ -11,17 +11,17 @@
 </head>
 <body>
 
-    <div class="callout large primary">
-        <div class="row column text-center">
-            <h1>Calcul Mental - Accueil</h1>
-            <h3>1ère Question</h3>
-        </div>
+<div class="callout large primary">
+    <div class="row column text-center">
+        <h1>Calcul Mental - Accueil</h1>
+        <h3>1ère Question</h3>
     </div>
-    <div class="row small-1 small-centered">
-        <p>14*2/8</p>
-        <form method="POST" action="jeu">
+</div>
+<div class="row small-1 small-centered">
+    <p>14*2/8</p>
+    <form method="POST" action="jeu">
 
-        </form>
-    </div>
+    </form>
+</div>
 </body>
 </html>

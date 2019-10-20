@@ -21,12 +21,26 @@
         <a class="button expanded" href="<c:url value="/question" />">COMMENCER</a>
     </div>
 </div>
+<div style="text-align: center;">
+    <h1>Voici les 10 meilleurs résultats</h1>
+</div>
+<div class="row">
+    <div style="text-align: center;">
+        <table>
+            <tr>
+                <th>Pseudo</th>
+                <th>Meilleur score</th>
+            </tr>
+            <!-- Problème lors de l'affichage des scores sur la page d'accueil-->
 
-    <script src="<%= request.getContextPath()%>/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
-    <script src="<%= request.getContextPath()%>/vendor/foundation-6.5.1/js/vendor/foundation.min.js"></script>
-    <script>
-        $(document).foundation();
-        document.documentElement.setAttribute('data-useragent', navigator.userAgent);
-    </script>
+        </table>
+    </div>
+</div>
+<script src="<%= request.getContextPath()%>/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
+<script src="<%= request.getContextPath()%>/vendor/foundation-6.5.1/js/vendor/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+    document.documentElement.setAttribute('data-useragent', navigator.userAgent);
+</script>
 </body>
 </html>

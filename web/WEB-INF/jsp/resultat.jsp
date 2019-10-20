@@ -18,8 +18,8 @@
         </div>
     </div>
     <div class="text-center">
-            <p class="white-text text-lighten-5">Votre score est de <b>${nbCorrect} / ${nbQuestions}</b></p>
-            <a class="button expanded" href="<c:url value="/accueil" />">Retourner à l'accueil</a>
+        <p class="white-text text-lighten-5">Votre score est de <b>${nbVictoire} / ${nbQuestion}</b></p>
+        <a class="button expanded" href="<c:url value="/accueil" />">Retourner à l'accueil</a>
     </div>
 </div>
 <script src="<%= request.getContextPath()%>/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
