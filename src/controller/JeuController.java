@@ -3,6 +3,7 @@ package controller;
 
 import bo.Jeu;
 import model.JeuBean;
+import model.LoginBean;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,91 +12,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
 
-@WebServlet( name="JeuController",urlPatterns = {"/jeu"} )
+@WebServlet( name="JeuController",urlPatterns = {"/question"} )
 public class JeuController extends HttpServlet {
 
-    private static final String PAGE_JEU_JSP = "/WEB-INF/jsp/jeu.jsp";
+    private static final String PAGE_JEU_JSP = "/WEB-INF/jsp/question.jsp";
+    private static final String PAGE_LOGIN_JSP = "/login";
+    private static final String PAGE_RESULTAT_JSP = "/resultat";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession( true );
-
-        List<Jeu> dataSession = ( List<Jeu> ) session.getAttribute( "classement" );
-
-        if ( null == dataSession ) {
-            dataSession = new ArrayList<>();
-            dataSession.add( new Jeu() );
-            dataSession.add( new Jeu() );
-            session.setAttribute( "persons", dataSession );
+        LoginBean model = new LoginBean();
+        if(model.isConnected(request)){
+            HttpSession session = request.getSession();
+            //si le nombre de question traité est supérieur à 10 montre la page des résultat
+            if((int) session.getAttribute("nbQuestion") >= 10){
+                response.sendRedirect(request.getContextPath() + PAGE_RESULTAT_JSP);
+            }
+            //sinon on repose un calcul à l'utilisateur
+            else {
+                Jeu jeu = new Jeu();
+                jeu.expression(5);
+                request.setAttribute("jeu", jeu);
+                session.setAttribute("pile", jeu.getPile());
+                request.getRequestDispatcher(PAGE_JEU_JSP).forward(request, response);
+            }
         }
-
-        String action = request.getParameter( "action" );
-        if ( null == action ) {
-            request.getRequestDispatcher( PAGE_JEU_JSP ).forward( request, response );
-        } else {
-            int id;
-            try {
-                id = Integer.parseInt( request.getParameter( "id" ) );
-            } catch ( Exception e ) {
-                id = -1;
-            }
-            switch ( action ) {
-                case "jeu":
-                    Jeu currentJeu;
-                    if ( id >= 0 && id < dataSession.size() ) {
-                        currentJeu = dataSession.get( id );
-                    } else {
-                        currentJeu = new Jeu();
-                    }
-                    request.setAttribute( "currentJeu", currentJeu );
-                    request.getRequestDispatcher( PAGE_JEU_JSP ).forward( request, response );
-                    break;
-                default:
-                    response.sendRedirect( request.getContextPath() + "/jeu" );
-            }
+        else {
+            response.sendRedirect(request.getContextPath() + PAGE_LOGIN_JSP);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if ( "DELETE".equals( request.getParameter( "form-method" ) ) ) {
-            doDelete( request, response );
-        } else {
-
-            HttpSession session = request.getSession( true );
-            List<Jeu> dataSession = ( List<Jeu> ) session.getAttribute( "persons" );
-
-            JeuBean model = new JeuBean();
-
-            int id = model.getJeu().getId();
-            if ( id >= 0 && id < dataSession.size() ) {
-                Jeu currentPerson = dataSession.get( id );
-                currentPerson.setQuestion( model.getJeu().getQuestion() );
-            } else {
-                model.getJeu().setId( dataSession.size() );
-                dataSession.add( model.getJeu() );
-            }
-            response.sendRedirect( request.getContextPath() + "/jeu" );
-        }
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession( true );
-        List<Jeu> dataSession = ( List<Jeu> ) session.getAttribute( "jeu" );
-
-        int id;
-        try {
-            id = Integer.parseInt( request.getParameter( "form-id" ) );
-        } catch ( Exception e ) {
-            id = -1;
-        }
-        if ( id >= 0 && id < dataSession.size() ) {
-            dataSession.remove( id );
-        }
-        response.sendRedirect( request.getContextPath() + "/jeu" );
+        JeuBean model = new JeuBean();
+        model.verifReponse(request);
+        request.setAttribute("answer", model);
+        doGet(request, response);
     }
 }

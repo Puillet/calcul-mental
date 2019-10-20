@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css"/>
 </head>
 <body>
-
+<div class="container">
     <div class="callout large primary">
         <div class="row column text-center">
             <h1>Calcul Mental - Accueil</h1>
@@ -18,28 +18,9 @@
     </div>
 
     <div>
-        <a class="button expanded" href="<c:url value="/jeu" />">COMMENCER</a>
+        <a class="button expanded" href="<c:url value="/question" />">COMMENCER</a>
     </div>
-
-    <div class="row small-8 small-centered">
-        <table>
-            <thead>
-            <tr>
-                <th>Rang</th>
-                <th>Nom</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="classement" items="${ sessionScope.classement }" varStatus="status">
-                <tr>
-                    <td>${classement.rang}</td>
-                    <td>${classement.nom}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-
+</div>
 
     <script src="<%= request.getContextPath()%>/vendor/foundation-6.5.1/js/vendor/jquery.js"></script>
     <script src="<%= request.getContextPath()%>/vendor/foundation-6.5.1/js/vendor/foundation.min.js"></script>
